@@ -166,6 +166,7 @@ BOOST_FUSION_ADAPT_STRUCT(
 
 namespace WaterObjects {
   
+  // there's a difference between syntactical complexity and architectural complexity.
   
 #pragma mark Junctions
   template <typename Iterator>
@@ -173,7 +174,7 @@ namespace WaterObjects {
     junction_parser_t() : junction_parser_t::base_type(start) {
       wordLex %= lexeme[+char_(WORDLEX_STR)];
       commentLex %= -lit(';') >> lexeme[*(char_ - eol)]; // keep spaces
-      //format:           ID            Elevation   Demand     [Pattern]     [;Description]
+      //format: ID        Elevation   Demand    [Pattern]   [;Description]
       start %= wordLex >> double_ >> double_ >> -wordLex >> -commentLex;
       //BOOST_SPIRIT_DEBUG_NODE(start);
       //BOOST_SPIRIT_DEBUG_NODE(wordLex);
